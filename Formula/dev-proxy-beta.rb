@@ -1,11 +1,11 @@
 class DevProxyBeta < Formula
-  proxyVersion = "0.17.0-beta.3"
+  proxyVersion = "0.17.0-beta.4"
   if OS.linux?
     proxyArch = "linux-x64"
-    proxySha = "894D8857E6325E878B28E62ECBF5D620A152F299BC1B06CA1EDA1F0509771FB8"
+    proxySha = "24FB0BD65E6BF6EEA9B9EC55C20513CE080F12A6E64EE46FFDCD8D619F072DD1"
   else
     proxyArch = "osx-x64"
-    proxySha = "67BEA923659CD33E346A6A72517B7B48E189D7B1D7F57217AD9CA8135F1710C7"
+    proxySha = "B27F97128F5C4BA36786871B85FA307B3888CBB7F9585006F035FDEEFA334E9C"
   end
 
   desc "Dev Proxy #{proxyVersion}"
@@ -16,17 +16,17 @@ class DevProxyBeta < Formula
 
   def install
     prefix.install Dir["*"]
-    chmod 0555, prefix/"devproxy"
+    chmod 0555, prefix/"devproxy-beta"
     if OS.mac?
       chmod 0555, prefix/"libe_sqlite3.dylib"
     else
       chmod 0555, prefix/"libe_sqlite3.so"
     end
-    bin.install_symlink prefix/"devproxy"
+    bin.install_symlink prefix/"devproxy-beta"
   end
 
   test do
-    assert_match proxyVersion.to_s, shell_output("#{bin}/devproxy --version")
+    assert_match proxyVersion.to_s, shell_output("#{bin}/devproxy-beta --version")
   end
 
   livecheck do
